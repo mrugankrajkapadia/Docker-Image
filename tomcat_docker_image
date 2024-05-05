@@ -1,0 +1,15 @@
+FROM centos:7
+
+RUN yum install net-tools -y
+RUN yum install java-11-openjdk -y
+Run yum install git -y
+RUN yum install tar -y
+
+ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.88/bin/apache-tomcat-9.0.88.tar.gz /
+
+RUN tar -xzvf apache-tomcat-9.0.88.tar.gz
+
+COPY project.war /apache-tomcat-9.0.88/webapps/
+EXPOSE 8080/tcp
+
+CMD [ "/apache-tomcat-9.0.88/bin/catalina.sh","run" ]
